@@ -68,6 +68,31 @@ describe("Generator", function() {
        assert.equal(0, manifestObj.length);
     });
 
+    it("should set webview and experimental permission when developer wants a webview", function() {  
+       var g = new Generator();
+       g.appPermissions = {}; 
+       g.appPermissions.webview = true;
+       
+       var manifest = g.buildData();
+       var manifestObj = manifest.appPermissions;
+       assert.notEqual(-1, manifestObj.indexOf("webview"));
+       assert.notEqual(-1, manifestObj.indexOf("experimental"));
+       assert.equal(2, manifestObj.length);
+    });
+  
+    it("should not set webview nor experimental permission when developer doesn't want webview", function() {  
+       var g = new Generator();
+       g.appPermissions = {}; 
+       g.appPermissions.webview = false;
+       
+       var manifest = g.buildData();
+       var manifestObj = manifest.appPermissions;
+       assert.equal(-1, manifestObj.indexOf("webview"));
+       assert.equal(-1, manifestObj.indexOf("experimental"));
+       assert.equal(0, manifestObj.length);
+    });
+
+
     it("should set usb permission when developer wants usb", function() {  
        var g = new Generator();
        g.appPermissions = {}; 
