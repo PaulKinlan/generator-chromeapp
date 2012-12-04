@@ -95,6 +95,12 @@ Generator.prototype.askFor = function askFor( argument ) {
     warning: 'You can change the permissions'
   },
   {
+    name: 'tcplistenPermission',
+    message: 'Would you like to use TCP Listen in your app?',
+    default: "Y/n",
+    warning: 'You can change the permissions'
+  },
+ {
     name: 'mediagalleryPermission',
     message: 'Would you like to use the Media Gallery API in your app?',
     default: "Y/n",
@@ -122,6 +128,7 @@ Generator.prototype.askFor = function askFor( argument ) {
     if((/y/i).test(props.udpbindPermission)) connections.push("udp-bind::8899");
     if((/y/i).test(props.udpsendPermission)) connections.push("udp-send-to::8899");
     if((/y/i).test(props.tcpPermission)) connections.push("tcp-connect");
+    if((/y/i).test(props.tcplistenPermission)) connections.push("tcp-listen");
 
 
     // Complex permission objects
@@ -185,7 +192,7 @@ Generator.prototype.buildData = function () {
   if(complexPermissions.length > 0) {
     for(var p = 0; permission = complexPermissions[p]; p ++) {
       // Complex permissions aren't keyed off the name, remove it.
-      delete data.appPermissions[permission];  
+      delete data.appPermissions[p];  
       data.appPermissions.push(permission);
     }
   }

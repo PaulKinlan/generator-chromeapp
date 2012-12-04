@@ -130,7 +130,54 @@ describe("Generator", function() {
        assert.notEqual(-1, manifestObj[0].mediaGalleries.indexOf("read"));
        assert.notEqual(-1, manifestObj[0].mediaGalleries.indexOf("allAutoDetected"));
        assert.equal(1, manifestObj.length);
+     });
+
+    it("should set socket and tcp-connect permission when developer wants tcp Send API", function() {  
+       var g = new Generator();
+       g.appPermissions.socket = {"socket": ["tcp-connect"]}; 
+       
+       var manifest = g.buildData();
+       var manifestObj = manifest.appPermissions;
+       assert.notEqual(false, !!manifestObj[0].socket);
+       assert.notEqual(-1, manifestObj[0].socket.indexOf("tcp-connect"));
+       assert.equal(1, manifestObj.length);
     });
+
+   it("should set socket and udp-bind permission when developer wants listen on a udp port", function() {  
+       var g = new Generator();
+       g.appPermissions.socket = {"socket": ["udp-bind::8899"] }; 
+       
+       var manifest = g.buildData();
+       var manifestObj = manifest.appPermissions;
+       assert.notEqual(false, !!manifestObj[0].socket);
+       assert.notEqual(-1, manifestObj[0].socket.indexOf("udp-bind::8899"));
+       assert.equal(1, manifestObj.length);
+    });
+    
+    it("should set socket and udp-send-to permission when developer wants send on a udp port", function() {  
+       var g = new Generator();
+       g.appPermissions.socket = {"socket": ["udp-send-to::8899"]}; 
+       
+       var manifest = g.buildData();
+       var manifestObj = manifest.appPermissions;
+       assert.notEqual(false, !!manifestObj[0].socket);
+       assert.notEqual(-1, manifestObj[0].socket.indexOf("udp-send-to::8899"));
+       assert.equal(1, manifestObj.length);
+    });
+
+    it("should set socket and tcp-listen permission when developer wants listen on a tcp port", function() {  
+       var g = new Generator();
+       g.appPermissions.socket = {"socket": ["tcp-listen"]}; 
+       
+       var manifest = g.buildData();
+       var manifestObj = manifest.appPermissions;
+       assert.notEqual(false, !!manifestObj[0].socket);
+       assert.notEqual(-1, manifestObj[0].socket.indexOf("tcp-listen"));
+       assert.equal(1, manifestObj.length);
+    });
+
+
+
   }); 
 
   describe("#createManifest", function() {
