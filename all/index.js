@@ -147,7 +147,7 @@ Generator.prototype.writeFiles = function() {
   
   this.directory( '.', '.' );
 
-  this.template( 'app/index.html', path.join( 'app', 'index.html' ), data );
+  this.template( 'app/views/index.html', path.join( 'app', 'views', 'index.html' ), data );
   this.template( 'app/manifest.json', path.join( 'app', 'manifest.json' ), data );
   this.template( 'app/_locales/en/messages.json', path.join( 'app', '_locales', 'en' , 'messages.json' ), data );
 }

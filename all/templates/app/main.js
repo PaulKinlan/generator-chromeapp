@@ -5,7 +5,7 @@
  * @see http://developer.chrome.com/trunk/apps/app.window.html
  */
 chrome.app.runtime.onLaunched.addListener(function(intentData) {
-    chrome.app.window.create('index.html', {
+    chrome.app.window.create('views/index.html', {
         width: 500,
         height: 309
     });
